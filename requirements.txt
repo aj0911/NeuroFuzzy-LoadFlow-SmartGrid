@@ -1,0 +1,16 @@
+deepdiff==8.5.0
+geojson==3.2.0
+lxml==6.0.0
+networkx==3.5
+numpy==2.3.1
+orderly-set==5.5.0
+packaging==25.0
+pandapower==3.1.2
+pandas==2.3.1
+python-dateutil==2.9.0.post0
+pytz==2025.2
+scipy==1.16.0
+six==1.17.0
+tqdm==4.67.1
+typing_extensions==4.14.1
+tzdata==2025.2

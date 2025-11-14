@@ -1,0 +1,36 @@
+{
+  "dataset_info": {
+    "total_samples": 5000,
+    "train_samples": 4000,
+    "val_samples": 1000,
+    "input_features": 20,
+    "output_features": 66,
+    "n_buses": 33
+  },
+  "sparsity_stats": {
+    "overall_sparsity_pct": 53.668000000000006,
+    "mean_available_features": 9.2664,
+    "min_available_features": 2,
+    "max_available_features": 18
+  },
+  "voltage_stats": {
+    "mean": 0.99952644792918,
+    "std": 0.004489951557395119,
+    "min": 0.9009971362874544,
+    "max": 1.0,
+    "violations_low": 546,
+    "violations_high": 0,
+    "normal_count": 164454
+  },
+  "angle_stats": {
+    "mean": -0.0022221359228536378,
+    "std": 0.03170298080501398,
+    "min": -1.2688603240207716,
+    "max": 0.6426048706807252
+  },
+  "measurement_types": {
+    "voltage_measurements": 10416,
+    "current_measurements": 389,
+    "power_measurements": 34752
+  }
+}

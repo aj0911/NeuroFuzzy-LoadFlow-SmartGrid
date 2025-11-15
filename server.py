@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 
 # Add src to path
-sys.path.append(str(Path(__file__).parent.parent / 'src'))
+sys.path.append('src')
 
 from neurofuzzy_model import NeuroFuzzyLoadFlowModel
 from fuzzy_preprocessor import FuzzyPreprocessor
@@ -119,12 +119,12 @@ def load_models():
     
     try:
         # Load fuzzy preprocessor
-        fuzzy_path = Path(__file__).parent.parent / 'models' / 'fuzzy_preprocessor.pkl'
+        fuzzy_path = 'models/fuzzy_preprocessor.pkl'
         with open(fuzzy_path, 'rb') as f:
             fuzzy_preprocessor = pickle.load(f)
         
         # Load neural network model
-        model_path = Path(__file__).parent.parent / 'models' / 'checkpoints' / 'neurofuzzy_best.pth'
+        model_path = 'models/checkpoints/neurofuzzy_best.pth'
         checkpoint = torch.load(model_path, map_location=device, weights_only=False)
         
         model = NeuroFuzzyLoadFlowModel(

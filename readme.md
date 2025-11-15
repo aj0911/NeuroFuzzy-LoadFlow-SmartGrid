@@ -4,7 +4,7 @@
 **Team:** Abhinav Jha, Akshin Saxena, Akshat Garg  
 **Department:** Electrical Engineering | **Year:** 2025
 
-[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1-orange.svg)](https://pytorch.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104-green.svg)](https://fastapi.tiangolo.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -347,7 +347,7 @@ python generate_ieee33_dataset.py --samples 5000 --sparsity 0.5
 
 ### Prerequisites
 
-- **Python:** 3.12+
+- **Python:** 3.13+
 - **OS:** Linux, macOS, Windows
 - **RAM:** 4GB minimum
 - **Storage:** 500MB
@@ -364,7 +364,7 @@ python3 -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 # Install dependencies
-pip install -r requirements.txt
+python3.13 -m pip install -r requirements.txt
 ```
 
 ### Option 2: Development Installation
@@ -1166,7 +1166,7 @@ vercel
 
 ```dockerfile
 # Dockerfile (create this)
-FROM python:3.12-slim
+FROM python:3.13-slim
 
 WORKDIR /app
 
@@ -1301,8 +1301,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.12'
-      - run: pip install -r requirements.txt
+          python-version: '3.13'
+      - run: python3.13 -m pip install -r requirements.txt
       - run: pytest tests/ -v --cov=src
 ```
 

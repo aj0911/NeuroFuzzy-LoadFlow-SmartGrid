@@ -376,9 +376,6 @@ cd neuro-fuzzy-loadflow
 
 # Install in editable mode
 pip install -e .
-
-# Install development dependencies
-pip install -r requirements-dev.txt
 ```
 
 ### Dependencies
@@ -475,10 +472,10 @@ python src/evaluate.py
 
 ```bash
 # Development server
-python api/main.py
+python server.py
 
 # Production server
-uvicorn api.main:app --host 0.0.0.0 --port 8000 --workers 4
+uvicorn server:app --host 0.0.0.0 --port 8000
 
 # API docs at: http://localhost:8000/docs
 ```
@@ -522,7 +519,7 @@ print(f"Confidence: {metadata['confidence_score']:.3f}")
 ### REST API Endpoints
 
 Base URL (local): `http://localhost:8000`  
-Base URL (production): `https://neurofuzzy-loadflow-smartgrid.vercel.app`
+Base URL (production): `https://neurofuzzy-loadflow-smartgrid.onrender.com`
 
 #### 1. Health Check
 
@@ -911,10 +908,7 @@ neuro-fuzzy-loadflow/
 ├── vercel.json                        # Vercel deployment config
 ├── .gitignore                         # Git ignore rules
 │
-├── api/                               # FastAPI Backend
-│   ├── __init__.py
-│   ├── main.py                        # API endpoints
-│   └── requirements.txt               # API-specific dependencies
+├── server.py                               # FastAPI Backend
 │
 ├── src/                               # Core Implementation
 │   ├── fuzzy_preprocessor.py          # Fuzzy logic system (314 lines)
@@ -960,19 +954,14 @@ neuro-fuzzy-loadflow/
 │       ├── fig8_model_comparison.png
 │       └── fig9_feature_importance.png
 │
-├── results/                           # Evaluation Results
-│   ├── data-analysis/                 # Data analysis outputs
-│   │   ├── *.png (6 figures)
-│   │   └── data_analysis_summary.json
-│   ├── evaluation_metrics.json        # Performance metrics
-│   ├── prediction_comparison.png      # Predictions vs ground truth
-│   ├── error_analysis.png             # Error distribution
-│   └── sparsity_impact.png            # Sparsity vs accuracy
-│
-└── docs/                              # Additional Documentation
-    ├── BTECH_PROJECT_ASSESSMENT.md    # Project assessment (A+ grade)
-    ├── FINAL_BTECH_SUMMARY.md         # Complete summary
-    └── PROJECT_STRUCTURE.txt          # Directory tree
+└──results/                           # Evaluation Results
+    ├── data-analysis/                 # Data analysis outputs
+    │   ├── *.png (6 figures)
+    │   └── data_analysis_summary.json
+    ├── evaluation_metrics.json        # Performance metrics
+    ├── prediction_comparison.png      # Predictions vs    ground truth
+    ├── error_analysis.png             # Error distribution
+    └── sparsity_impact.png            # Sparsity vs accuracy
 ```
 
 ### File Sizes
@@ -1132,101 +1121,6 @@ class WeightedMSELoss(nn.Module):
    - StandardScaler (zero mean, unit variance)
    - Applied after imputation
    - Fitted on training set only
-
----
-
-## 🚀 Deployment
-
-### Option 1: Vercel (Serverless)
-
-```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# Login
-vercel login
-
-# Deploy
-vercel
-
-# Follow prompts, project will be deployed to:
-# https://neurofuzzy-loadflow-smartgrid.vercel.app
-```
-
-**vercel.json** (already configured):
-```json
-{
-  "version": 2,
-  "builds": [{ "src": "api/main.py", "use": "@vercel/python" }],
-  "routes": [{ "src": "/(.*)", "dest": "api/main.py" }]
-}
-```
-
-### Option 2: Docker Container
-
-```dockerfile
-# Dockerfile (create this)
-FROM python:3.13-slim
-
-WORKDIR /app
-
-# Install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy project files
-COPY src/ ./src/
-COPY api/ ./api/
-COPY models/ ./models/
-
-# Expose port
-EXPOSE 8000
-
-# Run API
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
-```
-
-```bash
-# Build image
-docker build -t neuro-fuzzy-api .
-
-# Run container
-docker run -p 8000:8000 neuro-fuzzy-api
-
-# Access at http://localhost:8000
-```
-
-### Option 3: AWS Lambda
-
-```bash
-# Install Mangum (ASGI adapter for Lambda)
-pip install mangum
-
-# Update api/main.py:
-from mangum import Mangum
-handler = Mangum(app)
-
-# Deploy using AWS SAM or Serverless Framework
-serverless deploy
-```
-
-### Environment Variables
-
-```bash
-# .env file
-MODEL_PATH=models/checkpoints/neurofuzzy_best.pth
-FUZZY_PATH=models/fuzzy_preprocessor.pkl
-DEVICE=cpu
-LOG_LEVEL=info
-```
-
-### Performance Tuning
-
-**For Production:**
-- Use **GPU** if available (`device='cuda'`)
-- Enable **batch prediction** for multiple requests
-- Implement **caching** for frequent inputs
-- Use **async workers** (uvicorn with `--workers 4`)
 
 ---
 
@@ -1447,7 +1341,7 @@ _Signal Processing, Dataset Validation_
 
 ### Supervision
 
-**Dr. [Supervisor Name]**  
+**Dr. Sudarshan Kumar Babu Valluru**  
 _Professor, Department of Electrical Engineering_  
 Delhi Technological University
 
@@ -1513,6 +1407,6 @@ GitHub Discussions: [https://github.com/aj0911/NeuroFuzzy-LoadFlow-SmartGrid/dis
 Made with ❤️ by Team Neuro-Fuzzy  
 Delhi Technological University | 2025
 
-[Documentation](README.md) • [API Docs](http://localhost:8000/docs) • [Report Issue](https://github.com/aj0911/NeuroFuzzy-LoadFlow-SmartGrid/issues)
+[Documentation](README.md) • [API Docs](https://neurofuzzy-loadflow-smartgrid.onrender.com/docs) • [Report Issue](https://github.com/aj0911/NeuroFuzzy-LoadFlow-SmartGrid/issues)
 
 </div>

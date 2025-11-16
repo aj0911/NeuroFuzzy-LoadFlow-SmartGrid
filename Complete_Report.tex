@@ -136,8 +136,8 @@
 
 \vspace{15mm}
 
-% DTU Logo (add your logo file)
-% \includegraphics[width=40mm]{dtu_logo.png}
+% DTU Logo
+\includegraphics[width=50mm]{DTU_Official_logo.png}
 
 \vspace{10mm}
 
@@ -757,6 +757,13 @@ The proposed system follows a pipeline architecture consisting of four main stag
     \item \textbf{Post-processing}: Denormalizes outputs and formats results
 \end{enumerate}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/architecture/fig4_model_pipeline.png}
+\caption{Complete System Architecture and Pipeline}
+\label{fig:system_pipeline}
+\end{figure}
+
 The key innovation lies in the integration of fuzzy preprocessing with deep learning, allowing the system to leverage both domain knowledge (encoded in fuzzy rules) and data-driven pattern learning (captured by the neural network).
 
 \subsection{Input-Output Specification}
@@ -857,6 +864,13 @@ Membership functions:
 \end{itemize}
 
 Rationale: Characterizes the overall data availability. Below 40\% is considered sparse (disaster scenario), 40-70\% is moderate, and above 70\% approaches normal operation.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/architecture/fig3_fuzzy_membership.png}
+\caption{Fuzzy Membership Functions for Input and Output Variables}
+\label{fig:fuzzy_membership}
+\end{figure}
 
 \subsubsection{Output Variables}
 
@@ -1239,6 +1253,13 @@ The IEEE 33-bus system is a standard test case for distribution system analysis:
     \item \textbf{Topology}: Main feeder with 3 lateral branches
 \end{itemize}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/architecture/fig10_system_topology.png}
+\caption{IEEE 33-Bus Radial Distribution System Topology}
+\label{fig:system_topology}
+\end{figure}
+
 \subsection{Rationale for Selection}
 
 The IEEE 33-bus system was chosen because:
@@ -1373,38 +1394,38 @@ The system is implemented in Python 3.13, chosen for its extensive ecosystem of 
 
 The project follows a modular structure for maintainability and clarity:
 
-\begin{verbatim}
+\begin{lstlisting}[language=bash, caption={Project Directory Structure}]
 neuro-fuzzy-loadflow/
-├── src/                              # Core implementation
-│   ├── fuzzy_preprocessor.py         # Fuzzy logic system
-│   ├── neurofuzzy_model.py           # Neural network model
-│   ├── train.py                      # Training pipeline
-│   ├── evaluate.py                   # Evaluation metrics
-│   └── inference.py                  # Inference API
-│
-├── data_generation/                  # Dataset generation
-│   ├── ieee_33_bus_system.py         # System definition
-│   ├── generate_all_figures.py       # Visualization
-│   └── main.py                       # Generation orchestration
-│
-├── tests/                            # Test suite
-│   ├── test_phase1_fuzzy.py          # Fuzzy tests
-│   ├── test_phase2_neural_network.py # NN tests
-│   └── test_complete_pipeline.py     # Integration tests
-│
-├── models/                           # Trained models
-│   ├── checkpoints/                  # Model checkpoints
-│   └── fuzzy_preprocessor.pkl        # Fitted fuzzy processor
-│
-├── output_generation/                # Generated datasets
-│   ├── sensor_inputs_ieee_33-bus.csv # Sparse inputs
-│   └── grid_states_ieee_33-bus.csv   # Ground truth
-│
-├── results/                          # Evaluation outputs
-├── figures/                          # Visualizations
-├── server.py                         # FastAPI server
-└── requirements.txt                  # Dependencies
-\end{verbatim}
+|-- src/                              # Core implementation
+|   |-- fuzzy_preprocessor.py         # Fuzzy logic system
+|   |-- neurofuzzy_model.py           # Neural network model
+|   |-- train.py                      # Training pipeline
+|   |-- evaluate.py                   # Evaluation metrics
+|   +-- inference.py                  # Inference API
+|
+|-- data_generation/                  # Dataset generation
+|   |-- ieee_33_bus_system.py         # System definition
+|   |-- generate_all_figures.py       # Visualization
+|   +-- main.py                       # Generation orchestration
+|
+|-- tests/                            # Test suite
+|   |-- test_phase1_fuzzy.py          # Fuzzy tests
+|   |-- test_phase2_neural_network.py # NN tests
+|   +-- test_complete_pipeline.py     # Integration tests
+|
+|-- models/                           # Trained models
+|   |-- checkpoints/                  # Model checkpoints
+|   +-- fuzzy_preprocessor.pkl        # Fitted fuzzy processor
+|
+|-- output_generation/                # Generated datasets
+|   |-- sensor_inputs_ieee_33-bus.csv # Sparse inputs
+|   +-- grid_states_ieee_33-bus.csv   # Ground truth
+|
+|-- results/                          # Evaluation outputs
+|-- figures/                          # Visualizations
+|-- server.py                         # FastAPI server
++-- requirements.txt                  # Dependencies
+\end{lstlisting}
 
 This structure separates concerns cleanly: core algorithms (src/), data generation (data\_generation/), testing (tests/), trained artifacts (models/), and deployment (server.py).
 
@@ -1942,7 +1963,7 @@ The API is deployed on Vercel, a cloud platform optimized for Python web applica
 
 \texttt{vercel.json} configuration:
 
-\begin{lstlisting}[language=JSON, caption={Vercel Configuration}]
+\begin{lstlisting}[caption={Vercel Configuration}]
 {
   "version": 2,
   "builds": [
@@ -2360,6 +2381,20 @@ Angle Range & -1.269° to +0.643° \\
 \end{tabular}
 \end{table}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/data-analysis/fig1_dataset_overview.png}
+\caption{Dataset Overview: Distribution of Sparsity Levels and Key Statistics}
+\label{fig:dataset_overview}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/data-analysis/fig2_voltage_analysis.png}
+\caption{Voltage Distribution Analysis Across All Buses}
+\label{fig:voltage_analysis}
+\end{figure}
+
 \subsection{Evaluation Metrics}
 
 The following metrics are used to evaluate model performance:
@@ -2424,6 +2459,20 @@ Training and validation losses showed consistent improvement:
 
 The baseline ANN showed faster initial convergence but plateaued at higher validation loss (1.896 vs 1.548), demonstrating the benefit of fuzzy feature integration.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/training/fig5_training_curves.png}
+\caption{Training and Validation Loss Curves for Neuro-Fuzzy and Baseline Models}
+\label{fig:training_curves}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{results/training_history.png}
+\caption{Detailed Training History with Learning Rate Schedule}
+\label{fig:training_history_detailed}
+\end{figure}
+
 \section{Prediction Accuracy}
 
 \subsection{Overall Performance}
@@ -2456,6 +2505,20 @@ $R^2$ & 0.263 & 0.010 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{results/prediction_comparison.png}
+\caption{Prediction vs. Ground Truth Comparison for Voltage Magnitudes and Phase Angles}
+\label{fig:prediction_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{results/error_analysis.png}
+\caption{Error Distribution Analysis and Residual Plots}
+\label{fig:error_analysis}
+\end{figure}
 
 \subsection{Interpretation of Results}
 
@@ -2535,6 +2598,20 @@ Linear Regression & 0.000580 & 0.004850 & 1,352 & 0.015 \\
 \end{tabular}
 \end{table}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/model-performance/fig6_performance_analysis.png}
+\caption{Comprehensive Performance Analysis Across Multiple Metrics}
+\label{fig:performance_analysis}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/comparisons/fig8_model_comparison.png}
+\caption{Model Comparison: Neuro-Fuzzy vs. Baseline Approaches}
+\label{fig:model_comparison}
+\end{figure}
+
 \subsection{Analysis of Improvements}
 
 \textbf{vs. Baseline ANN (no fuzzy features)}:
@@ -2588,6 +2665,20 @@ Table~\ref{tab:sparsity_impact} shows how accuracy varies with sparsity level.
 \end{tabular}
 \end{table}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/model-performance/fig7_sparsity_impact.png}
+\caption{Impact of Sensor Sparsity on Prediction Accuracy}
+\label{fig:sparsity_impact}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{results/sparsity_impact.png}
+\caption{Detailed Sparsity Analysis: MAE Variation Across Different Sparsity Levels}
+\label{fig:sparsity_detailed}
+\end{figure}
+
 \subsection{Sparsity Analysis Discussion}
 
 Interesting observations emerge from the sparsity analysis:
@@ -2634,6 +2725,27 @@ Without All Fuzzy Features & 0.000373 & +10.7\% \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/comparisons/fig9_feature_importance.png}
+\caption{Feature Importance Ablation Study Results}
+\label{fig:feature_importance}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{results/fuzzy_feature_distributions.png}
+\caption{Distribution of Fuzzy Feature Values Across Dataset}
+\label{fig:fuzzy_distributions}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{results/fuzzy_membership_functions.png}
+\caption{Fuzzy Membership Functions Visualization with Sample Data Points}
+\label{fig:fuzzy_functions}
+\end{figure}
 
 \subsection{Feature Importance Insights}
 
@@ -3473,6 +3585,41 @@ The IEEE 33-bus radial distribution system used in this research has the followi
 \end{itemize}
 
 \section{Dataset Generation Parameters}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/data-analysis/02_voltage_distribution.png}
+\caption{Detailed Voltage Distribution Across All 33 Buses}
+\label{fig:voltage_distribution_appendix}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/data-analysis/03_angle_distribution.png}
+\caption{Phase Angle Distribution Across All 33 Buses}
+\label{fig:angle_distribution_appendix}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/data-analysis/04_correlation_analysis.png}
+\caption{Correlation Analysis Between Input Features and Output States}
+\label{fig:correlation_appendix}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/data-analysis/05_input_characteristics.png}
+\caption{Input Feature Characteristics and Statistical Properties}
+\label{fig:input_characteristics}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/data-analysis/06_statistical_summary.png}
+\caption{Comprehensive Statistical Summary of Dataset Features}
+\label{fig:statistical_summary}
+\end{figure}
 
 \textbf{Load Variation}:
 \begin{itemize}

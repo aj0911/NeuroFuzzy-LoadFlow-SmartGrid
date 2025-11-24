@@ -132,7 +132,7 @@ class FuzzyPreprocessor:
                 'min': np.percentile(current_values, 1),
                 'max': np.percentile(current_values, 99)
             }
-        
+
         if len(power_values) > 0:
             self.power_stats = {
                 'min': np.percentile(power_values, 1),

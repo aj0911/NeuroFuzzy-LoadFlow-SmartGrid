@@ -1,75 +1,54 @@
 \documentclass[12pt,a4paper]{report}
 
-% DTU B.Tech Project Report Template
-% Following DTU Guidelines for Project Report Preparation
-
-%----------------------------
-% PACKAGES
-%----------------------------
 \usepackage[utf8]{inputenc}
-\usepackage[top=25mm, bottom=25mm, left=35mm, right=25mm]{geometry}
+\usepackage[T1]{fontenc}
 \usepackage{times}
-\usepackage{setspace}
-\usepackage{graphicx}
+\usepackage[top=25mm, bottom=25mm, left=35mm, right=25mm]{geometry}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{multirow}
 \usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, er}
+\usepackage{siunitx}
+\usepackage{setspace}
 \usepackage{amssymb}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{listings}
-\usepackage{xcolor}
-\usepackage{hyperref}
 \usepackage{cite}
-\usepackage{multirow}
-\usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage{titlesec}
-\usepackage{fancyhdr}
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{MyVerbatim}{Verbatim}{breaklines=true}
 
-%----------------------------
-% FORMATTING
-%----------------------------
-\onehalfspacing  % 1.5 line spacing as per DTU guidelines
-\setlength{\parindent}{20mm}  % 20mm first line indentation
+% Defining colors
+\definecolor{primaryblue}{RGB}{30,100,200}
+\definecolor{lightgray}{RGB}{220,220,220}
+\definecolor{headerblue}{RGB}{0,102,204}
 
-% Chapter title formatting (Centered, 50mm from top, ALL CAPS, Bold)
-\titleformat{\chapter}[display]
-{\normalfont\Large\bfseries\centering}
-{\MakeUppercase{\chaptertitlename\ \thechapter}}{0pt}{\Large\MakeUppercase}
-\titlespacing*{\chapter}{0pt}{50mm}{20pt}
-
-% Section formatting (Left-aligned, 20mm offset from left)
-\titleformat{\section}
-{\normalfont\large\bfseries}{\thesection}{1em}{}
-\titlespacing*{\section}{20mm}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-
-% Subsection formatting
-\titleformat{\subsection}
-{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
-\titlespacing*{\subsection}{20mm}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-
-% Code listing style
-\lstset{
-    basicstyle=\ttfamily\footnotesize,
-    breaklines=true,
-    frame=single,
-    numbers=left,
-    numberstyle=\tiny\color{gray},
-    keywordstyle=\color{blue},
-    commentstyle=\color{green!60!black},
-    stringstyle=\color{red},
-    showstringspaces=false,
-    captionpos=b
-}
-
-% Hyperlink colors
+% Setting up hyperref
 \hypersetup{
     colorlinks=true,
-    linkcolor=black,
-    citecolor=blue,
+    linkcolor=blue,
     urlcolor=blue
 }
+
+% Setting up fancy headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Final Year B.Tech Project Report}
+\fancyfoot[C]{\small Page \thepage}
 
 %----------------------------
 % DOCUMENT INFORMATION
@@ -90,95 +69,61 @@
 %----------------------------
 \begin{document}
 
+% Set roman numerals for front matter
+\pagenumbering{roman}
+
 %===========================
 % COVER PAGE
 %===========================
 \begin{titlepage}
-\centering
-\vspace*{20mm}
+    \centering
+    {\Large\bfseries\MakeUppercase{\projecttitle}\par}
+    
+    \vspace{8mm}
+    
+    {\large A PROJECT REPORT\par}
+    \vspace{2mm}
+    {\normalsize SUBMITTED IN PARTIAL FULFILLMENT OF THE REQUIREMENTS\par}
+    \vspace{1mm}
+    {\normalsize FOR THE AWARD OF THE DEGREE OF\par}
+    
+    \vspace{5mm}
+    
+    {\large\bfseries BACHELOR OF TECHNOLOGY\par}
+    \vspace{1mm}
+    {\normalsize IN\par}
+    \vspace{1mm}
+    {\large\bfseries ELECTRICAL ENGINEERING\par}
+    
+    \vspace{10mm}
+    
+    {\normalsize Submitted by:\par}
+    \vspace{2mm}
+    {\large\bfseries \authorone~(Roll No. \rollone)\par}
+    {\large\bfseries \authortwo~(Roll No. \rolltwo)\par}
+    {\large\bfseries \authorthree~(Roll No. \rollthree)\par}
+    
+    \vspace{10mm}
+    
+    {\normalsize Under the supervision of\par}
+    \vspace{2mm}
+    {\large\bfseries \supervisor\par}
+    
+    \vspace{10mm}
+    
+    % DTU Logo (kept exactly where you placed it)
+    \includegraphics[width=30mm]{DTU_Official_logo.png}
+    
+    \vspace{6mm}
+    {\normalsize\bfseries \MakeUppercase{\department}\par}
+    {\large DELHI TECHNOLOGICAL UNIVERSITY\par}
+    {\normalsize Bawana Road, Delhi-110042\par}
+    \vspace{6mm}
+    {\large\bfseries NOV, 2025}
+    \vfill
+    
+    \end{titlepage}
 
-{\LARGE\bfseries\MakeUppercase{\projecttitle}\par}
-
-\vspace{15mm}
-
-{\Large A PROJECT REPORT\par}
-\vspace{5mm}
-{\Large SUBMITTED IN PARTIAL FULFILLMENT OF THE REQUIREMENTS\par}
-\vspace{3mm}
-{\Large FOR THE AWARD OF THE DEGREE OF\par}
-
-\vspace{10mm}
-
-{\Large\bfseries BACHELOR OF TECHNOLOGY\par}
-\vspace{3mm}
-{\Large IN\par}
-\vspace{3mm}
-{\Large\bfseries ELECTRICAL ENGINEERING\par}
-
-\vspace{15mm}
-
-{\large Submitted by:\par}
-\vspace{5mm}
-{\large\bfseries \authorone\par}
-{\large (Roll No. \rollone)\par}
-\vspace{3mm}
-{\large\bfseries \authortwo\par}
-{\large (Roll No. \rolltwo)\par}
-\vspace{3mm}
-{\large\bfseries \authorthree\par}
-{\large (Roll No. \rollthree)\par}
-
-\vspace{10mm}
-
-{\large Under the supervision of\par}
-\vspace{3mm}
-{\large\bfseries \supervisor\par}
-
-\vspace{15mm}
-
-% DTU Logo
-\includegraphics[width=50mm]{DTU_Official_logo.png}
-
-\vspace{10mm}
-
-{\large\bfseries \MakeUppercase{\department}\par}
-{\large\bfseries DELHI TECHNOLOGICAL UNIVERSITY\par}
-{\large Bawana Road, Delhi-110042\par}
-
-\vspace{10mm}
-
-{\large\bfseries MAY, \submissionyear\par}
-
-\end{titlepage}
-
-%===========================
-% CERTIFICATE
-%===========================
-\chapter*{CERTIFICATE}
-\addcontentsline{toc}{chapter}{Certificate}
-\thispagestyle{empty}
-
-\begin{spacing}{2.0}
-This is to certify that the project report entitled \textbf{``\projecttitle''} submitted by \textbf{\authorone} (Roll No. \rollone), \textbf{\authortwo} (Roll No. \rolltwo), and \textbf{\authorthree} (Roll No. \rollthree) in partial fulfillment of the requirements for the award of the degree of \textbf{Bachelor of Technology} in \textbf{Electrical Engineering} at Delhi Technological University is a bonafide record of the work carried out by them under my supervision. The contents of this report, in full or in parts, have not been submitted to any other Institution or University for the award of any degree or diploma.
-
-\vspace{30mm}
-
-\noindent\textbf{\supervisor}\\
-Professor\\
-Department of Electrical Engineering\\
-Delhi Technological University\\
-Delhi-110042
-
-\vspace{10mm}
-
-\noindent Date: \hrulefill
-
-\noindent Place: Delhi
-\end{spacing}
-
-\newpage
-
-%===========================
 % CANDIDATE'S DECLARATION
 %===========================
 \chapter*{CANDIDATE'S DECLARATION}
@@ -215,6 +160,35 @@ Roll No: \rollthree
 \newpage
 
 %===========================
+%===========================
+% CERTIFICATE
+%===========================
+\chapter*{CERTIFICATE}
+\addcontentsline{toc}{chapter}{Certificate}
+\thispagestyle{empty}
+
+\begin{spacing}{2.0}
+This is to certify that the project report entitled \textbf{``\projecttitle''} submitted by \textbf{\authorone} (Roll No. \rollone), \textbf{\authortwo} (Roll No. \rolltwo), and \textbf{\authorthree} (Roll No. \rollthree) in partial fulfillment of the requirements for the award of the degree of \textbf{Bachelor of Technology} in \textbf{Electrical Engineering} at Delhi Technological University is a bonafide record of the work carried out by them under my supervision. The contents of this report, in full or in parts, have not been submitted to any other Institution or University for the award of any degree or diploma.
+
+\vspace{20mm}
+
+\noindent\textbf{\supervisor}\\
+Professor\\
+Department of Electrical Engineering\\
+Delhi Technological University\\
+Delhi-110042
+
+\vspace{10mm}
+
+\noindent Date: \hrulefill
+
+\noindent Place: Delhi
+\end{spacing}
+
+\newpage
+
+%===========================
+
 % ACKNOWLEDGEMENT
 %===========================
 \chapter*{ACKNOWLEDGEMENT}
@@ -225,7 +199,7 @@ We would like to express our sincere gratitude to all those who have contributed
 
 First and foremost, we extend our deepest appreciation to our project supervisor, \textbf{\supervisor}, Professor, Department of Electrical Engineering, Delhi Technological University, for his invaluable guidance, continuous encouragement, and insightful feedback throughout this project. His expertise in power systems and artificial intelligence has been instrumental in shaping this research.
 
-We are grateful to \textbf{Dr. Rajesh Kumar}, Head of the Department of Electrical Engineering, for providing us with the necessary facilities and resources to carry out this project.
+We are grateful to \textbf{Dr. Rachna Garg}, Head of the Department of Electrical Engineering, for providing us with the necessary facilities and resources to carry out this project.
 
 We would like to thank the faculty members of the Department of Electrical Engineering for their support and for imparting the knowledge that formed the foundation of this work.
 
@@ -336,6 +310,9 @@ This research contributes to enhancing grid resilience and supporting rapid disa
 %---------------------------
 % CHAPTER 1: INTRODUCTION
 %---------------------------
+% Switch to arabic numerals for main content
+\pagenumbering{arabic}
+
 \chapter{INTRODUCTION}
 
 \section{Background}
@@ -757,7 +734,7 @@ The proposed system follows a pipeline architecture consisting of four main stag
     \item \textbf{Post-processing}: Denormalizes outputs and formats results
 \end{enumerate}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/architecture/fig4_model_pipeline.png}
 \caption{Complete System Architecture and Pipeline}
@@ -865,7 +842,7 @@ Membership functions:
 
 Rationale: Characterizes the overall data availability. Below 40\% is considered sparse (disaster scenario), 40-70\% is moderate, and above 70\% approaches normal operation.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/architecture/fig3_fuzzy_membership.png}
 \caption{Fuzzy Membership Functions for Input and Output Variables}
@@ -1253,7 +1230,7 @@ The IEEE 33-bus system is a standard test case for distribution system analysis:
     \item \textbf{Topology}: Main feeder with 3 lateral branches
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/architecture/fig10_system_topology.png}
 \caption{IEEE 33-Bus Radial Distribution System Topology}
@@ -1442,19 +1419,19 @@ The fuzzy preprocessor (\texttt{src/fuzzy\_preprocessor.py}) implements the fuzz
 \begin{lstlisting}[language=Python, caption={Fuzzy Preprocessor Core Structure}]
 class FuzzyPreprocessor:
     def __init__(self):
-        """Initialize membership functions and rule base"""
+        #Initialize membership functions and rule base
         # Define fuzzy variables (voltage, current, power, availability)
         # Define membership functions
         # Create fuzzy rules
         # Instantiate control systems
         
     def fit(self, X):
-        """Fit normalization statistics on training data"""
+        #Fit normalization statistics on training data
         # Learn current/power ranges from data
         # Store normalization parameters
         
     def generate_features(self, X):
-        """Generate 12 fuzzy features per sample"""
+        #Generate 12 fuzzy features per sample
         # For each sample:
         #   - Compute fuzzy memberships
         #   - Apply inference rules
@@ -1609,10 +1586,7 @@ The model includes methods for preprocessing inputs consistently:
 
 \begin{lstlisting}[language=Python, caption={Input Preprocessing}]
 def preprocess_input(self, X_sensor, X_fuzzy):
-    """
-    Preprocess inputs: impute missing values, create masks, 
-    normalize, and concatenate features.
-    """
+    #Preprocess inputs: impute missing values, create masks, normalize, and concatenate features.
     # KNN imputation for missing sensor values
     imputer = KNNImputer(n_neighbors=5)
     X_imputed = imputer.fit_transform(X_sensor)
@@ -1642,7 +1616,7 @@ The training script (\texttt{src/train.py}) orchestrates the complete training p
 
 \begin{lstlisting}[language=Python, caption={Training Loop Structure}]
 def train_epoch(model, dataloader, optimizer, criterion, device):
-    """Train for one epoch"""
+    #Train for one epoch
     model.train()
     total_loss = 0
     
@@ -1663,7 +1637,7 @@ def train_epoch(model, dataloader, optimizer, criterion, device):
     return total_loss / len(dataloader)
 
 def validate(model, dataloader, criterion, device):
-    """Validate model"""
+    #Validate model
     model.eval()
     total_loss = 0
     
@@ -1759,9 +1733,9 @@ import pandapower as pp
 import pandapower.networks as pn
 
 def generate_scenario(net, sparsity_level):
-    """Generate one power flow scenario with variations"""
+    #Generate one power flow scenario with variations
     
-    # 1. Vary loads randomly (±20%)
+    # 1. Vary loads randomly (+/-20%)
     for load_idx in net.load.index:
         variation = np.random.uniform(0.8, 1.2)
         net.load.at[load_idx, 'p_mw'] *= variation
@@ -1793,7 +1767,7 @@ def generate_scenario(net, sparsity_level):
     return measurements, state
 
 def generate_dataset(n_samples=5000):
-    """Generate complete dataset"""
+    #Generate complete dataset
     net = pn.case33bw()  # IEEE 33-bus system
     
     X_all = []
@@ -1894,7 +1868,7 @@ async def predict(request: PredictionRequest):
 
 @app.post("/predict/batch")
 async def predict_batch(requests: List[PredictionRequest]):
-    """Batch prediction endpoint"""
+    #Batch prediction endpoint
     results = []
     for req in requests:
         result = await predict(req)
@@ -2008,7 +1982,7 @@ For cross-platform deployment, the model is exported to ONNX format:
 import torch.onnx
 
 def export_to_onnx(model, output_path):
-    """Export PyTorch model to ONNX format"""
+    #Export PyTorch model to ONNX format
     
     # Create dummy input
     dummy_input = torch.randn(1, 52)
@@ -2059,7 +2033,7 @@ import numpy as np
 from src.fuzzy_preprocessor import FuzzyPreprocessor
 
 def test_membership_functions():
-    """Test fuzzy membership function definitions"""
+    #Test fuzzy membership function definitions
     processor = FuzzyPreprocessor()
     
     # Test voltage membership
@@ -2068,7 +2042,7 @@ def test_membership_functions():
     assert processor.voltage['high'].mf(1.02) > 0.5
 
 def test_feature_generation():
-    """Test fuzzy feature generation"""
+    #Test fuzzy feature generation
     processor = FuzzyPreprocessor()
     
     # Create sample data
@@ -2085,7 +2059,7 @@ def test_feature_generation():
     assert not np.isnan(features).any()
 
 def test_confidence_scores():
-    """Test confidence score ranges"""
+    #Test confidence score ranges
     processor = FuzzyPreprocessor()
     
     # High quality scenario
@@ -2108,7 +2082,7 @@ import torch
 from src.neurofuzzy_model import NeuroFuzzyLoadFlowModel
 
 def test_model_architecture():
-    """Test model architecture and parameter count"""
+    #Test model architecture and parameter count
     model = NeuroFuzzyLoadFlowModel()
     
     # Check total parameters
@@ -2121,7 +2095,7 @@ def test_model_architecture():
     assert model.fc4.out_features == 66
 
 def test_forward_pass():
-    """Test forward pass shape"""
+    #Test forward pass shape
     model = NeuroFuzzyLoadFlowModel()
     
     # Create dummy input
@@ -2134,7 +2108,7 @@ def test_forward_pass():
     assert output.shape == (32, 66)
 
 def test_gradient_flow():
-    """Test gradient flow through network"""
+    #Test gradient flow through network
     model = NeuroFuzzyLoadFlowModel()
     
     x = torch.randn(10, 52, requires_grad=True)
@@ -2159,7 +2133,7 @@ def test_gradient_flow():
 
 \begin{lstlisting}[language=Python, caption={Integration Tests}]
 def test_complete_prediction_pipeline():
-    """Test complete prediction pipeline"""
+    #Test complete prediction pipeline
     
     # 1. Load trained model
     model = load_trained_model()
@@ -2194,7 +2168,7 @@ def test_complete_prediction_pipeline():
         assert -5 <= a <= 5
 
 def test_inference_time():
-    """Test inference time requirement (<100ms)"""
+    #Test inference time requirement (<100ms)
     import time
     
     model = load_trained_model()
@@ -2215,7 +2189,7 @@ def test_inference_time():
     assert avg_time < 100, f"Inference too slow: {avg_time:.2f}ms"
 
 def test_batch_prediction():
-    """Test batch prediction consistency"""
+    #Test batch prediction consistency
     model = load_trained_model()
     fuzzy_processor = load_fuzzy_processor()
     
@@ -2245,6 +2219,7 @@ def test_batch_prediction():
 
 Running the test suite:
 
+{\footnotesize
 \begin{verbatim}
 $ pytest tests/ -v --cov=src --cov-report=html
 
@@ -2261,7 +2236,7 @@ tests/test_complete_pipeline.py::test_onnx_export PASSED
 ========================= 8 passed in 12.45s ===========================
 
 Coverage: 95%
-\end{verbatim}
+\end{verbatim}}
 
 \section{Documentation}
 
@@ -2271,32 +2246,6 @@ All modules include comprehensive docstrings following Google style:
 
 \begin{lstlisting}[language=Python, caption={Documentation Example}]
 def predict(self, X_sensor, X_fuzzy):
-    """
-    Predict grid state from sensor measurements and fuzzy features.
-    
-    Args:
-        X_sensor (np.ndarray): Sensor measurements of shape (n_samples, 20).
-                               May contain NaN for missing values.
-        X_fuzzy (np.ndarray): Fuzzy features of shape (n_samples, 12).
-    
-    Returns:
-        dict: Predictions containing:
-            - voltages (np.ndarray): Voltage magnitudes (33 buses)
-            - angles (np.ndarray): Phase angles in degrees (33 buses)
-            - metadata (dict): Inference time, confidence, sparsity
-    
-    Raises:
-        ValueError: If input shapes are invalid.
-        RuntimeError: If model is not fitted.
-    
-    Example:
-        >>> model = NeuroFuzzyLoadFlowModel()
-        >>> model.load('model.pth')
-        >>> measurements = np.random.rand(1, 20)
-        >>> fuzzy_feat = fuzzy_proc.generate_features(measurements)
-        >>> predictions = model.predict(measurements, fuzzy_feat)
-        >>> print(predictions['voltages'])
-    """
     # Implementation
 \end{lstlisting}
 
@@ -2358,7 +2307,7 @@ This chapter presents the experimental results and detailed analysis of the neur
 
 The evaluation uses the generated IEEE 33-bus dataset with the following characteristics:
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Dataset Statistics}
 \label{tab:dataset_stats}
@@ -2381,14 +2330,14 @@ Angle Range & -1.269° to +0.643° \\
 \end{tabular}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/data-analysis/fig1_dataset_overview.png}
 \caption{Dataset Overview: Distribution of Sparsity Levels and Key Statistics}
 \label{fig:dataset_overview}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/data-analysis/fig2_voltage_analysis.png}
 \caption{Voltage Distribution Analysis Across All Buses}
@@ -2420,7 +2369,7 @@ The following metrics are used to evaluate model performance:
 
 The neuro-fuzzy model was trained for 48 epochs before early stopping was triggered.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Training Summary}
 \label{tab:training_summary}
@@ -2459,14 +2408,14 @@ Training and validation losses showed consistent improvement:
 
 The baseline ANN showed faster initial convergence but plateaued at higher validation loss (1.896 vs 1.548), demonstrating the benefit of fuzzy feature integration.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/training/fig5_training_curves.png}
 \caption{Training and Validation Loss Curves for Neuro-Fuzzy and Baseline Models}
 \label{fig:training_curves}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{results/training_history.png}
 \caption{Detailed Training History with Learning Rate Schedule}
@@ -2479,7 +2428,7 @@ The baseline ANN showed faster initial convergence but plateaued at higher valid
 
 Table~\ref{tab:overall_performance} presents the overall prediction accuracy on the validation set of 1,000 samples.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Overall Prediction Accuracy}
 \label{tab:overall_performance}
@@ -2506,14 +2455,14 @@ $R^2$ & 0.263 & 0.010 \\
 \end{tabular}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{results/prediction_comparison.png}
 \caption{Prediction vs. Ground Truth Comparison for Voltage Magnitudes and Phase Angles}
 \label{fig:prediction_comparison}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{results/error_analysis.png}
 \caption{Error Distribution Analysis and Residual Plots}
@@ -2542,7 +2491,7 @@ $R^2$ & 0.263 & 0.010 \\
 
 Table~\ref{tab:perbus_accuracy} shows voltage MAE for selected buses to illustrate spatial error distribution.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Per-Bus Voltage MAE (Selected Buses)}
 \label{tab:perbus_accuracy}
@@ -2578,7 +2527,7 @@ This spatial pattern is physically intuitive: prediction accuracy decreases slig
 
 Table~\ref{tab:model_comparison} compares the neuro-fuzzy model against multiple baselines.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Comparison with Baseline Models}
 \label{tab:model_comparison}
@@ -2598,14 +2547,14 @@ Linear Regression & 0.000580 & 0.004850 & 1,352 & 0.015 \\
 \end{tabular}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/model-performance/fig6_performance_analysis.png}
 \caption{Comprehensive Performance Analysis Across Multiple Metrics}
 \label{fig:performance_analysis}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/comparisons/fig8_model_comparison.png}
 \caption{Model Comparison: Neuro-Fuzzy vs. Baseline Approaches}
@@ -2648,7 +2597,7 @@ A critical evaluation criterion is performance degradation as sensor sparsity in
 
 Table~\ref{tab:sparsity_impact} shows how accuracy varies with sparsity level.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Impact of Sparsity on Accuracy}
 \label{tab:sparsity_impact}
@@ -2665,14 +2614,14 @@ Table~\ref{tab:sparsity_impact} shows how accuracy varies with sparsity level.
 \end{tabular}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/model-performance/fig7_sparsity_impact.png}
 \caption{Impact of Sensor Sparsity on Prediction Accuracy}
 \label{fig:sparsity_impact}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{results/sparsity_impact.png}
 \caption{Detailed Sparsity Analysis: MAE Variation Across Different Sparsity Levels}
@@ -2709,7 +2658,7 @@ Even in the worst realistic case (70\% sparsity, 238 samples), voltage MAE remai
 
 To assess the value of individual fuzzy features, we perform ablation studies removing feature groups:
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Fuzzy Feature Ablation Study}
 \label{tab:feature_ablation}
@@ -2726,21 +2675,21 @@ Without All Fuzzy Features & 0.000373 & +10.7\% \\
 \end{tabular}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/comparisons/fig9_feature_importance.png}
 \caption{Feature Importance Ablation Study Results}
 \label{fig:feature_importance}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{results/fuzzy_feature_distributions.png}
 \caption{Distribution of Fuzzy Feature Values Across Dataset}
 \label{fig:fuzzy_distributions}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{results/fuzzy_membership_functions.png}
 \caption{Fuzzy Membership Functions Visualization with Sample Data Points}
@@ -2765,7 +2714,7 @@ Without All Fuzzy Features & 0.000373 & +10.7\% \\
 
 Real-time performance is critical for operational deployment. Table~\ref{tab:inference_time} presents detailed timing analysis.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Inference Time Analysis (CPU)}
 \label{tab:inference_time}
@@ -2789,7 +2738,7 @@ Max Time & 0.170 ms & 0.134 ms \\
 
 Inference time improves significantly with batching:
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Batch Inference Performance}
 \label{tab:batch_performance}
@@ -3061,7 +3010,7 @@ A complete production-ready system was implemented:
 
 Extensive experimental validation demonstrated exceptional performance:
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Summary of Key Results}
 \begin{tabular}{lc}
@@ -3554,7 +3503,7 @@ vol. 34, no. 4, pp. 2841-2850, July 2019.
 
 The IEEE 33-bus radial distribution system used in this research has the following detailed parameters:
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{IEEE 33-Bus System Branch Data}
 \label{tab:ieee33_branches}
@@ -3586,35 +3535,35 @@ The IEEE 33-bus radial distribution system used in this research has the followi
 
 \section{Dataset Generation Parameters}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/data-analysis/02_voltage_distribution.png}
 \caption{Detailed Voltage Distribution Across All 33 Buses}
 \label{fig:voltage_distribution_appendix}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/data-analysis/03_angle_distribution.png}
 \caption{Phase Angle Distribution Across All 33 Buses}
 \label{fig:angle_distribution_appendix}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/data-analysis/04_correlation_analysis.png}
 \caption{Correlation Analysis Between Input Features and Output States}
 \label{fig:correlation_appendix}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/data-analysis/05_input_characteristics.png}
 \caption{Input Feature Characteristics and Statistical Properties}
 \label{fig:input_characteristics}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/data-analysis/06_statistical_summary.png}
 \caption{Comprehensive Statistical Summary of Dataset Features}
@@ -3651,7 +3600,7 @@ The IEEE 33-bus radial distribution system used in this research has the followi
 
 Hyperparameter tuning was performed using validation set performance. Table~\ref{tab:hyperparam_tuning} shows selected configurations tested.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Hyperparameter Tuning Results}
 \label{tab:hyperparam_tuning}
@@ -3717,6 +3666,7 @@ The final architecture [128-256-128] was selected based on:
 
 \section{Neuro-Fuzzy Model Training Log}
 
+{\footnotesize 
 \begin{verbatim}
 Epoch 1/100: train_loss=2.323, val_loss=4.927, lr=0.001000, t=0.114s
 Epoch 2/100: train_loss=1.837, val_loss=5.300, lr=0.001000, t=0.078s
@@ -3734,10 +3684,11 @@ Early stopping triggered (no improvement for 15 epochs)
 Best model at epoch 33 with val_loss=1.548
 
 Training complete in 12.3 minutes
-\end{verbatim}
+\end{verbatim}}
 
 \section{Baseline ANN Training Log}
 
+{\footnotesize
 \begin{verbatim}
 Epoch 1/100: train_loss=2.416, val_loss=4.362, lr=0.001000, t=0.077s
 Epoch 2/100: train_loss=1.722, val_loss=2.334, lr=0.001000, t=0.072s
@@ -3751,7 +3702,7 @@ Early stopping triggered (no improvement for 15 epochs)
 Best model at epoch 21 with val_loss=2.164
 
 Training complete in 9.8 minutes
-\end{verbatim}
+\end{verbatim}}
 
 \chapter{CODE SNIPPETS}
 
@@ -3759,15 +3710,7 @@ Training complete in 9.8 minutes
 
 \begin{lstlisting}[language=Python, caption={End-to-End Prediction Function}]
 def complete_prediction_pipeline(measurements: np.ndarray):
-    """
-    Complete pipeline from raw measurements to grid state prediction.
-    
-    Args:
-        measurements: Array of shape (20,) with NaN for missing values
-    
-    Returns:
-        dict: Complete grid state with voltages, angles, metadata
-    """
+
     # Step 1: Load models
     model = torch.load('models/checkpoints/neurofuzzy_best.pth')
     fuzzy_processor = joblib.load('models/fuzzy_preprocessor.pkl')
@@ -3835,7 +3778,7 @@ def complete_prediction_pipeline(measurements: np.ndarray):
 
 \begin{lstlisting}[language=Python, caption={Complete Fuzzy Rule Set}]
 def create_fuzzy_rules(self):
-    """Create all 13 fuzzy inference rules"""
+    #Create all 13 fuzzy inference rules
     
     # Confidence Rules (7 rules)
     confidence_rules = [
@@ -3974,7 +3917,7 @@ def create_fuzzy_rules(self):
 
 \section{Training History Statistics}
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Detailed Training Statistics}
 \begin{tabular}{lcc}

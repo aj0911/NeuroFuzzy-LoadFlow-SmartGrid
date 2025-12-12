@@ -1327,17 +1327,17 @@ _Lead Developer, Power System Modeling_
 - Developed API backend
 - Email: abhinavjha_ee22b15_03@dtu.ac.in
 
-**Akshin Saxena** (2K22/EE/36)  
-_Data Preprocessing, Digital Logic_  
-- Designed fuzzy logic preprocessor
-- Created dataset generation scripts
-- Implemented data quality checks
-
-**Akshat Garg** (2K22/EE/35)  
+**Akshat Garg** (2K22/EE/33)  
 _Signal Processing, Dataset Validation_  
 - Noise modeling and injection
 - Statistical analysis
 - Visualization generation
+
+**Akshin Saxena** (2K22/EE/34)  
+_Data Preprocessing, Digital Logic_  
+- Designed fuzzy logic preprocessor
+- Created dataset generation scripts
+- Implemented data quality checks
 
 ### Supervision
 
